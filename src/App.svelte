@@ -23,10 +23,11 @@
   let tabTitles = ["Have to do", "Completed", "All"];
   let newTodoTitle = "";
   const addNewTodDo = () => {
+    let len = todos.length + 1;
     todos = [
       ...todos,
       {
-        id: todos.length + 1,
+        id: len,
         title: newTodoTitle.trim(),
         done: false,
       },
@@ -34,7 +35,7 @@
     haveToDo = [
       ...haveToDo,
       {
-        id: todos.length + 1,
+        id: len,
         title: newTodoTitle.trim(),
         done: false,
       },
@@ -86,7 +87,6 @@
       </WindowItem>
       <WindowItem>
         {todos.length === 0 ? "Nothing added!" : ""}
-
         {#each todos.sort((a, b) => (a.id > b.id ? 1 : -1)) as task}
           <ListItem
             on:click={() => {
@@ -97,9 +97,8 @@
               }
             }}
           >
-            <Tooltip top>
+           <Tooltip top>
               <span class={task.done ? "done" : ""}>{task.title}</span>
-
               <span slot="tip">Change State</span>
             </Tooltip>
           </ListItem>
